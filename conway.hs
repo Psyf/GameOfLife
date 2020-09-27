@@ -1,6 +1,5 @@
 import Data.Array
 import Control.Concurrent
-import System.Process
 
 main = do
 
@@ -55,9 +54,11 @@ alive = '⬜'
 dead = '⬛'
 boundary = ' '
 
-rowAsStr mtx x = [mtx ! (x, y) | y <- [0..(num_cols mtx)]]
-mtxAsStr mtx = unlines [rowAsStr mtx x | x <- [0..(num_rows mtx)]]
-printMtx mtx = putStr (mtxAsStr mtx)
+printMtx mtx = 
+    let rowAsStr mtx x = [mtx ! (x, y) | y <- [0..(num_cols mtx)]] 
+    in 
+      let mtxAsStr mtx = unlines [rowAsStr mtx x | x <- [0..(num_rows mtx)]] 
+      in putStr (mtxAsStr mtx)
 
 activateCells xs mtx = mtx // [(x, alive) | x <- xs]
 deactivateCells xs mtx = mtx // [(x, dead) | x <- xs]
